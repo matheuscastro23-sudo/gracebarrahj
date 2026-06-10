@@ -179,26 +179,127 @@ img { max-width: 100%; display: block; }
   padding: 4px;
 }
 
-/* Mobile menu */
+/* Mobile menu — drawer lateral da direita */
 .mobile-menu {
-  display: none;
+  display: flex;
   flex-direction: column;
   background: #111;
   position: fixed;
-  top: 86px;
-  left: 0; right: 0;
-  z-index: 999;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 280px;
+  max-width: 85vw;
+  z-index: 1100;
+  transform: translateX(100%);
+  transition: transform .32s cubic-bezier(.4,0,.2,1);
+  overflow-y: auto;
+  box-shadow: -4px 0 30px rgba(0,0,0,.4);
 }
-.mobile-menu.open { display: flex; }
+.mobile-menu.open { transform: translateX(0); }
+
+/* Overlay escuro atrás do drawer */
+.mobile-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  z-index: 1099;
+  opacity: 0;
+  transition: opacity .32s;
+}
+.mobile-overlay.open { display: block; opacity: 1; }
+
+/* Cabeçalho do drawer com logo */
+.mobile-menu-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 22px 22px 18px;
+  border-bottom: 1px solid #222;
+}
+.mobile-menu-header img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.mobile-menu-header-text {
+  font-family: 'Oswald', sans-serif;
+  font-size: 13px;
+  color: #ccc;
+  line-height: 1.4;
+  letter-spacing: .3px;
+}
+.mobile-menu-header-text strong {
+  display: block;
+  color: #fff;
+  font-size: 14px;
+}
+
+/* Botão fechar */
+.mobile-menu-close {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+  flex-shrink: 0;
+  line-height: 1;
+  transition: color .2s;
+}
+.mobile-menu-close:hover { color: #fff; }
+
+/* Links do drawer */
 .mobile-menu a {
   font-family: 'Oswald', sans-serif;
   font-size: 16px;
-  color: #ccc;
-  padding: 16px 30px;
-  border-bottom: 1px solid #222;
-  transition: color .2s;
+  color: #bbb;
+  padding: 15px 24px;
+  border-bottom: 1px solid #1c1c1c;
+  transition: color .2s, background .2s, padding-left .2s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
-.mobile-menu a:hover { color: #fff; }
+.mobile-menu a i {
+  color: #CC0000;
+  font-size: 14px;
+  width: 16px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.mobile-menu a:hover {
+  color: #fff;
+  background: #1a1a1a;
+  padding-left: 30px;
+}
+
+/* CTA no rodapé do drawer */
+.mobile-menu-cta {
+  margin: 20px 20px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #CC0000;
+  color: #fff !important;
+  font-family: 'Oswald', sans-serif;
+  font-size: 13px !important;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  padding: 14px 18px !important;
+  border-radius: 2px;
+  text-align: center;
+  border-bottom: none !important;
+}
+.mobile-menu-cta:hover {
+  background: #a80000 !important;
+  padding-left: 18px !important;
+}
 
 /* ====================================================
    HERO  — large grey area with BJJ photo as bg
@@ -1016,7 +1117,8 @@ h2.section-title {
   .footer { padding: 40px 0 0; }
   .footer-grid { gap: 28px; }
 
-  /* Mobile menu */
+  /* Mobile menu drawer */
+  .mobile-menu { width: 260px; }
   .mobile-menu a { font-size: 15px; padding: 14px 20px; }
 }
 
@@ -1077,15 +1179,38 @@ h2.section-title {
   </div>
 </nav>
 
-<!-- Mobile menu -->
+<!-- Overlay do menu mobile -->
+<div class="mobile-overlay" id="mobileOverlay"></div>
+
+<!-- Mobile menu — drawer lateral -->
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#home">Home</a>
-  <a href="#sobre">Sobre</a>
-  <a href="#aulas">Aulas</a>
-  <a href="#equipe">Equipe</a>
-  <a href="#horarios">Horários</a>
-  <a href="#avaliacoes">Avaliações</a>
-  <a href="#contato">Contato</a>
+
+  <!-- Cabeçalho com logo -->
+  <div class="mobile-menu-header">
+    <img src="https://media.base44.com/images/public/6a05bc22ccdeb67a51b1272c/7da6deaad_logo.jpeg" alt="Logo"/>
+    <div class="mobile-menu-header-text">
+      <strong>Gracie Barra</strong>
+      Henrique Jorge
+    </div>
+    <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Fechar menu">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+
+  <!-- Links de navegação -->
+  <a href="#home"><i class="fa-solid fa-house"></i> Home</a>
+  <a href="#sobre"><i class="fa-solid fa-circle-info"></i> Sobre</a>
+  <a href="#aulas"><i class="fa-solid fa-person-falling-burst"></i> Aulas</a>
+  <a href="#equipe"><i class="fa-solid fa-users"></i> Equipe</a>
+  <a href="#horarios"><i class="fa-solid fa-clock"></i> Horários</a>
+  <a href="#avaliacoes"><i class="fa-solid fa-star"></i> Avaliações</a>
+  <a href="#contato"><i class="fa-solid fa-envelope"></i> Contato</a>
+
+  <!-- CTA -->
+  <a href="https://wa.me/5585997978705?text=Olá!%20Gostaria%20de%20agendar%20uma%20aula%20experimental%20na%20Gracie%20Barra%20Henrique%20Jorge." target="_blank" class="mobile-menu-cta">
+    <i class="fa-brands fa-whatsapp" style="font-size:16px;"></i> AULA EXPERIMENTAL
+  </a>
+
 </div>
 
 <!-- ===== HERO ===== -->
@@ -1565,11 +1690,27 @@ h2.section-title {
 </footer>
 
 <script>
-  // Mobile menu toggle
+  // Mobile menu drawer
   const ham = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobileMenu');
-  ham.addEventListener('click', () => mobileMenu.classList.toggle('open'));
-  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+  const mobileOverlay = document.getElementById('mobileOverlay');
+  const mobileClose = document.getElementById('mobileMenuClose');
+
+  function openMenu() {
+    mobileMenu.classList.add('open');
+    mobileOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    mobileMenu.classList.remove('open');
+    mobileOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  ham.addEventListener('click', openMenu);
+  mobileClose.addEventListener('click', closeMenu);
+  mobileOverlay.addEventListener('click', closeMenu);
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
 
   // Navbar scroll effect
   window.addEventListener('scroll', () => {
