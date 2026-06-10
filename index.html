@@ -487,6 +487,46 @@ h2.section-title {
   padding: 100px 0;
   background: #fff;
 }
+
+/* Professor principal */
+.team-principal-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+.team-card-principal {
+  max-width: 380px;
+  width: 100%;
+}
+.team-img-principal {
+  height: 420px !important;
+}
+.team-info-principal {
+  text-align: center;
+  padding: 24px 22px 26px !important;
+}
+.team-name-principal {
+  font-size: 1.4rem !important;
+  margin-bottom: 10px !important;
+}
+.team-belt-principal {
+  margin-bottom: 10px;
+  display: inline-block;
+}
+.team-bio {
+  font-size: .85rem;
+  color: #666;
+  margin-top: 10px;
+  line-height: 1.7;
+}
+
+/* Grid secundário (Edu Café + Nossa Equipe) */
+.team-grid-secondary {
+  grid-template-columns: repeat(2, 1fr) !important;
+  margin-top: 36px;
+}
+
+/* Grid base */
 .team-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -898,7 +938,11 @@ h2.section-title {
   /* Equipe */
   .equipe { padding: 60px 0; }
   .team-grid { grid-template-columns: 1fr; gap: 24px; margin-top: 36px; }
+  .team-grid-secondary { grid-template-columns: 1fr !important; }
   .team-img { height: 260px; }
+  .team-img-principal { height: 320px !important; }
+  .team-card-principal { max-width: 100%; }
+  .team-principal-wrap { margin-top: 36px; }
 
   /* Horários */
   .horarios { padding: 60px 0; }
@@ -956,7 +1000,10 @@ h2.section-title {
 
   /* Equipe */
   .equipe { padding: 50px 0; }
-  .team-img { height: 240px; }
+  .team-img { height: 220px; }
+  .team-img-principal { height: 280px !important; }
+  .team-name-principal { font-size: 1.2rem !important; }
+  .team-info-principal { padding: 18px 16px 20px !important; }
 
   /* Horários */
   .horarios { padding: 50px 0; }
@@ -1171,22 +1218,22 @@ h2.section-title {
     <h2 class="section-title">Os Professores</h2>
 
     <!-- Professor Principal — destaque -->
-    <div style="display:flex;justify-content:center;margin-top:50px;">
-      <div class="team-card" style="max-width:380px;width:100%;">
-        <div class="team-img" style="height:420px;">
+    <div class="team-principal-wrap">
+      <div class="team-card team-card-principal">
+        <div class="team-img team-img-principal">
           <img src="https://media.base44.com/images/public/6a05bc22ccdeb67a51b1272c/efa2f8ab3_HelioMouraoGB.png" alt="Hélio Mourão" style="object-position:center top;"/>
         </div>
-        <div class="team-info" style="text-align:center;padding:24px 22px 26px;">
-          <h3 style="font-size:1.4rem;margin-bottom:10px;">Hélio Mourão</h3>
-          <span class="belt black" style="margin-bottom:10px;display:inline-block;">Faixa Preta – Professor GB</span>
-          <p style="font-size:.85rem;color:#666;margin-top:10px;line-height:1.7;">Professor principal da Gracie Barra Henrique Jorge. Dedicado a transmitir os valores do Jiu-Jitsu dentro e fora do tatame.</p>
+        <div class="team-info team-info-principal">
+          <h3 class="team-name-principal">Hélio Mourão</h3>
+          <span class="belt black team-belt-principal">Faixa Preta – Professor GB</span>
+          <p class="team-bio">Professor principal da Gracie Barra Henrique Jorge. Dedicado a transmitir os valores do Jiu-Jitsu dentro e fora do tatame.</p>
         </div>
       </div>
     </div>
 
     <!-- Demais professores -->
-    <div class="team-grid" style="margin-top:36px;">
-      <div class="team-card" style="grid-column:1/2;">
+    <div class="team-grid team-grid-secondary">
+      <div class="team-card">
         <div class="team-img">
           <img src="https://media.base44.com/images/public/6a05bc22ccdeb67a51b1272c/0343313cc_EduCafeGB.png" alt="Edu Café" style="object-position:center top;"/>
         </div>
@@ -1195,7 +1242,7 @@ h2.section-title {
           <span class="belt black">Faixa Preta – Professor GB</span>
         </div>
       </div>
-      <div class="team-card" style="grid-column:3/4;">
+      <div class="team-card">
         <div class="team-img">
           <img src="https://media.base44.com/images/public/6a05bc22ccdeb67a51b1272c/29c1a34be_Professores.png" alt="Equipe de Professores" style="object-position:center top;"/>
         </div>
