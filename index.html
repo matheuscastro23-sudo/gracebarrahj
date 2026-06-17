@@ -1196,12 +1196,24 @@ img {
   h2.section-title { font-size: 2rem; }
   .container { padding: 0 20px; }
 
-  /* Notícias — 1 coluna */
+  /* Notícias — 1 coluna empilhada */
   .noticias { padding: 60px 0; }
-  .noticias-grid { flex-direction: column; }
+  .noticias-grid {
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .noticia-card {
+    flex: none;
+    width: 100%;
+    min-width: 0;
+  }
   .noticia-body { padding: 18px 18px 20px; }
   .noticia-titulo { font-size: 1rem; }
-  .noticia-texto { font-size: .85rem; }
+  .noticia-texto {
+    font-size: .85rem;
+    -webkit-line-clamp: 4;
+  }
   .noticia-img { aspect-ratio: 16/9; }
 
   /* Sobre */
@@ -1271,6 +1283,8 @@ img {
   /* Notícias */
   .noticias { padding: 50px 0; }
   .noticias-grid { gap: 16px; }
+  .noticia-card { width: 100%; flex: none; }
+  .noticia-img { aspect-ratio: 4/3; }
   .noticia-titulo { font-size: .95rem; }
 
   /* Sobre */
@@ -1354,9 +1368,9 @@ img {
       <li><a href="#home" class="nav-link active">Home</a></li>
       <li><a href="#sobre" class="nav-link">Sobre</a></li>
       <li><a href="#aulas" class="nav-link">Aulas</a></li>
+      <li><a href="#noticias" class="nav-link">Notícias</a></li>
       <li><a href="#equipe" class="nav-link">Equipe</a></li>
       <li><a href="#horarios" class="nav-link">Horários</a></li>
-      <li><a href="#noticias" class="nav-link">Notícias</a></li>
       <li><a href="#avaliacoes" class="nav-link">Avaliações</a></li>
       <li><a href="#contato" class="nav-link">Contato</a></li>
     </ul>
@@ -1394,9 +1408,9 @@ img {
   <a href="#home"><i class="fa-solid fa-house"></i> Home</a>
   <a href="#sobre"><i class="fa-solid fa-circle-info"></i> Sobre</a>
   <a href="#aulas"><i class="fa-solid fa-person-falling-burst"></i> Aulas</a>
+  <a href="#noticias"><i class="fa-solid fa-newspaper"></i> Notícias</a>
   <a href="#equipe"><i class="fa-solid fa-users"></i> Equipe</a>
   <a href="#horarios"><i class="fa-solid fa-clock"></i> Horários</a>
-  <a href="#noticias"><i class="fa-solid fa-newspaper"></i> Notícias</a>
   <a href="#avaliacoes"><i class="fa-solid fa-star"></i> Avaliações</a>
   <a href="#contato"><i class="fa-solid fa-envelope"></i> Contato</a>
 
@@ -1932,9 +1946,9 @@ img {
         <a href="#home">Home</a>
         <a href="#sobre">Sobre</a>
         <a href="#aulas">Nossas Aulas</a>
+        <a href="#noticias">Notícias</a>
         <a href="#equipe">Equipe</a>
         <a href="#horarios">Horários</a>
-        <a href="#noticias">Notícias</a>
         <a href="#avaliacoes">Avaliações</a>
         <a href="#localizacao">Localização</a>
         <a href="#contato">Contato</a>
