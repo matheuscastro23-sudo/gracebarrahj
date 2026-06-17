@@ -312,27 +312,58 @@ img { max-width: 100%; display: block; }
   align-items: center;
   overflow: hidden;
 }
-/* Slider de fundo */
+/* ====================================================
+   HERO — responsivo completo
+   ==================================================== */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 500px;
+  max-height: 900px;
+  background: #111;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Container dos slides */
 .hero-slides {
   position: absolute;
   inset: 0;
   z-index: 0;
 }
+
+/* Cada slide ocupa 100% e usa <img> para controle perfeito */
 .hero-slide {
   position: absolute;
   inset: 0;
-  background-size: cover;
-  background-position: center top;
-  background-repeat: no-repeat;
   opacity: 0;
   transition: opacity 1.2s ease;
 }
 .hero-slide.active { opacity: 1; }
+
+/* Imagem dentro do slide: cobre o container sem distorcer */
+.hero-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+/* Overlay gradiente — mais forte em mobile para legibilidade do texto */
 .hero-slide::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, rgba(0,0,0,.65) 40%, rgba(0,0,0,.2));
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,.70) 0%,
+    rgba(0,0,0,.45) 60%,
+    rgba(0,0,0,.20) 100%
+  );
+  z-index: 1;
 }
 .hero-content {
   position: relative;
@@ -981,6 +1012,10 @@ img {
   /* Navbar */
   .nav-inner { padding: 0 20px; }
 
+  /* Hero */
+  .hero { height: 80vh; min-height: 480px; max-height: 820px; }
+  .hero-slide img { object-position: center top; }
+
   /* Sobre */
   .sobre-grid { grid-template-columns: 1fr; gap: 40px; }
   .sobre-img-wrap { display: none; }
@@ -1039,11 +1074,12 @@ img {
   .nav-inner { padding: 0 16px; height: 72px; }
 
   /* Hero */
-  .hero { min-height: 85vh; }
+  .hero { height: 70vh; min-height: 420px; max-height: 700px; }
   .hero-content { padding: 48px 20px 80px; max-width: 100%; }
   .hero-title { font-size: 2.8rem; }
   .hero-desc { font-size: .92rem; }
   .hero-dots { left: 20px; bottom: 20px; }
+  .hero-slide img { object-position: 65% top; }
 
   /* Seções genéricas */
   h2.section-title { font-size: 2rem; }
@@ -1070,7 +1106,8 @@ img {
   .team-img-principal { height: clamp(240px, 60vw, 300px) !important; }
 
   /* Hero slides — foco no centro em telas estreitas */
-  .hero-slide { background-position: 60% top; }
+  /* Hero — foco central em telas estreitas */
+  .hero-slide img { object-position: center top; }
 
   /* Horários */
   .horarios { padding: 60px 0; }
@@ -1134,8 +1171,12 @@ img {
   .team-info-principal { padding: 18px 16px 20px !important; }
 
   /* Hero — centraliza sujeito principal em telas muito pequenas */
-  .hero-slide { background-position: center top; }
-  .hero { min-height: 75vw; }
+  /* Hero — mobile pequeno */
+  .hero { height: 65vh; min-height: 380px; }
+  .hero-title { font-size: 2.2rem; }
+  .hero-desc { font-size: .88rem; max-width: 100%; }
+  .hero-content { padding: 40px 16px 72px; }
+  .hero-slide img { object-position: center top; }
 
   /* Horários */
   .horarios { padding: 50px 0; }
@@ -1259,11 +1300,21 @@ img {
 <!-- ===== HERO ===== -->
 <section class="hero" id="home">
   <div class="hero-slides">
-    <div class="hero-slide  active" style="background-image:url('https://media.base44.com/images/public/6a05bc22ccdeb67a51b1272c/4d8b03933_home1.png');"></div>
-    <div class="hero-slide" style="background-image:url('https://media.base44.com/images/public/6a05bc22ccdeb67a51b1272c/169bb5d4a_home2.png');"></div>
-    <div class="hero-slide" style="background-image:url('https://media.base44.com/images/public/6a05bc22ccdeb67a51b1272c/0fedfe059_home3.png');"></div>
-    <div class="hero-slide" style="background-image:url('https://media.base44.com/images/public/6a05bc22ccdeb67a51b1272c/4c44ee517_hom4.png');"></div>
-    <div class="hero-slide" style="background-image:url('https://media.base44.com/images/public/6a05bc22ccdeb67a51b1272c/2b7cbb3b7_home5.png');"></div>
+    <div class="hero-slide active">
+      <img src="https://media.base44.com/images/public/6a05bc22ccdeb67a51b1272c/4d8b03933_home1.png" alt="Gracie Barra Henrique Jorge" fetchpriority="high"/>
+    </div>
+    <div class="hero-slide">
+      <img src="https://media.base44.com/images/public/6a05bc22ccdeb67a51b1272c/169bb5d4a_home2.png" alt="Gracie Barra Henrique Jorge" loading="lazy"/>
+    </div>
+    <div class="hero-slide">
+      <img src="https://media.base44.com/images/public/6a05bc22ccdeb67a51b1272c/0fedfe059_home3.png" alt="Gracie Barra Henrique Jorge" loading="lazy"/>
+    </div>
+    <div class="hero-slide">
+      <img src="https://media.base44.com/images/public/6a05bc22ccdeb67a51b1272c/4c44ee517_hom4.png" alt="Gracie Barra Henrique Jorge" loading="lazy"/>
+    </div>
+    <div class="hero-slide">
+      <img src="https://media.base44.com/images/public/6a05bc22ccdeb67a51b1272c/2b7cbb3b7_home5.png" alt="Gracie Barra Henrique Jorge" loading="lazy"/>
+    </div>
   </div>
   <div class="hero-content">
     <div class="hero-eyebrow">
